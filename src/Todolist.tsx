@@ -2,8 +2,6 @@ import React from "react";
 
 type TodolistPropsType = {
     title: string
-    name1?: number
-    name2?: string
     tasks: Array<inArrayType>
 }
 
@@ -18,8 +16,6 @@ export const Todolist = (props:TodolistPropsType) => {
     return (
         <div>
             <h3>{props.title}</h3>
-            <div>{props.name1}</div>
-            <div>{props.name2}</div>
             <div>
                 <input/>
                 <button>+</button>

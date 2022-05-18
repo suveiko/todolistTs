@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import './App.css';
-import {InArrayType, Todolist} from "./Todolist";
 import {v1} from "uuid";
+import {InArrayType, Todolist} from "./Todolist";
 
-export type FilterType = 'All' | "Completed" | "Active"
+export type FilterType = 'All' | 'Active' | 'Completed'
 
 function App() {
     let [tasks, setTasks] = useState<InArrayType[]>([
@@ -13,12 +13,11 @@ function App() {
         {id: v1(), title: "Redux", isDone: false},
         {id: v1(), title: "CraphQL", isDone: false}
     ])
+    let [filter, setFilter] = useState<FilterType>('All')
 
     const addTask = (newTitle: string) => {
-        let newTasks = {id: v1(), title: newTitle, isDone: false}
-        setTasks([newTasks, ...tasks])
+        setTasks([{id: v1(), title: newTitle, isDone: false}, ...tasks])
     }
-    let [filter, setFilter] = useState<FilterType>('All')
     const deleteTask = (id: string) => {
         let filteredTasks = tasks.filter(t => t.id !== id)
         setTasks(filteredTasks)
@@ -26,15 +25,15 @@ function App() {
     const changeFilter = (value: FilterType) => {
         setFilter(value)
     }
-
+    const changeStatus = (taskId: string, isDone: boolean) => {
+        let task = tasks.find(t => t.id === taskId)
+        if (task) task.isDone = isDone
+        setTasks([...tasks])
+    }
 
     let tasksForToDoList = tasks
-    if (filter === "Completed") {
-        tasksForToDoList = tasks.filter(t => t.isDone)
-    }
-    if (filter === "Active") {
-        tasksForToDoList = tasks.filter(t => !t.isDone)
-    }
+    if (filter === "Completed") tasksForToDoList = tasks.filter(t => t.isDone)
+    if (filter === "Active") tasksForToDoList = tasks.filter(t => !t.isDone)
 
     return (
         <div className="App">
@@ -42,7 +41,9 @@ function App() {
                       tasks={tasksForToDoList}
                       deleteTask={deleteTask}
                       changeFilter={changeFilter}
-                      addTask={addTask}/>
+                      addTask={addTask}
+                      changeStatus={changeStatus}
+            />
         </div>
     );
 }

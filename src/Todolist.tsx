@@ -18,16 +18,16 @@ export type InArrayType = {
     isDone: boolean
 }
 
-export const Todolist = (p: TodolistPropsType) => {
+export const Todolist = ({name, tasks, deleteTask, addTask, changeStatus, changeFilter, filter}: TodolistPropsType) => {
 
     const [newTitle, setTitle] = useState('')
     const [error, setError] = useState<string | null>(null)
 
-    const onClickButtonHandler = (value: FilterType) => p.changeFilter(value)
+    const onClickButtonHandler = (value: FilterType) => changeFilter(value)
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
     const addTaskHandler = () => {
         if (newTitle.trim() !== '') {
-            p.addTask(newTitle.trim())
+            addTask(newTitle.trim())
             setTitle('')
         } else {
             setError('Field is required')
@@ -37,12 +37,14 @@ export const Todolist = (p: TodolistPropsType) => {
         setError(null)
         if (e.key === 'Enter' && newTitle.trim() !== '') {
             addTaskHandler()
+        } else {
+            setError('Field is required')
         }
     }
 
     return (
         <div>
-            <h3>{p.name}</h3>
+            <h3>{name}</h3>
             <div>
                 <input value={newTitle} onChange={onChangeInputHandler}
                        onKeyUp={onKeyPressHandler}
@@ -52,32 +54,32 @@ export const Todolist = (p: TodolistPropsType) => {
                 {error && <div className='error-message'>{error}</div>}
             </div>
             <ul>
-                {p.tasks.map(t => {
+                {tasks.map(({id, isDone, title}) => {
                     const onChangeInputCheckedHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                        p.changeStatus(t.id, e.currentTarget.checked)
+                        changeStatus(id, e.currentTarget.checked)
                     }
-                    const deleteTaskButton = () => p.deleteTask(t.id)
+                    const deleteTaskButton = () => deleteTask(id)
                     return (
-                        <li key={t.id} className={t.isDone ? 'is-done' : ''}>
+                        <li key={id} className={isDone ? 'is-done' : ''}>
                             <button onClick={deleteTaskButton}>X</button>
                             <input
                                 type="checkbox"
                                 onChange={onChangeInputCheckedHandler}
-                                checked={t.isDone}
+                                checked={isDone}
                             />
-                            <span>{t.title}</span>
+                            <span>{title}</span>
                         </li>
                     )
                 })}
             </ul>
             <div>
-                <button className={p.filter === 'All' ? 'active-filter' : ''}
+                <button className={filter === 'All' ? 'active-filter' : ''}
                         onClick={() => onClickButtonHandler('All')}>All
                 </button>
-                <button className={p.filter === 'Active' ? 'active-filter' : ''}
+                <button className={filter === 'Active' ? 'active-filter' : ''}
                         onClick={() => onClickButtonHandler('Active')}>Active
                 </button>
-                <button className={p.filter === 'Completed' ? 'active-filter' : ''}
+                <button className={filter === 'Completed' ? 'active-filter' : ''}
                         onClick={() => onClickButtonHandler('Completed')}>Completed
                 </button>
             </div>

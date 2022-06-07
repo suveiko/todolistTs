@@ -5,22 +5,22 @@ type EditableSpanType = {
     updateTitle: (newTitle: string) => void
 }
 
-const EditableSpan = (p: EditableSpanType) => {
+const EditableSpan = ({title, updateTitle}: EditableSpanType) => {
 
     const [editMode, setEditMode] = useState(false)
-    const [title, setTitle] = useState(p.title)
+    const [newTitle, setNewTitle] = useState(title)
 
     const onEditorMode = () => setEditMode(true)
     const offEditorMode = () => setEditMode(false)
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.currentTarget.value)
-        p.updateTitle(title)
+        setNewTitle(e.currentTarget.value)
+        updateTitle(newTitle)
     }
 
     return (
         editMode
             ? <input
-                value={title}
+                value={newTitle}
                 style={{width: '80px'}}
                 autoFocus onBlur={offEditorMode}
                 onChange={onChangeHandler}
@@ -28,7 +28,7 @@ const EditableSpan = (p: EditableSpanType) => {
             : <span
                 style={{cursor: 'pointer'}}
                 onDoubleClick={onEditorMode}
-            >{p.title}</span>
+            >{title}</span>
     );
 };
 

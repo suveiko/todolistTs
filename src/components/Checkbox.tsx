@@ -5,7 +5,7 @@ type CheckboxType = {
     isDone: boolean
 }
 
-export const Checkbox = (props: CheckboxType) => {
+const Checkbox = (props: CheckboxType) => {
     const onChangeHandlerCheck = (event: ChangeEvent<HTMLInputElement>) => {
         props.callBack(event.currentTarget.checked)
     }
@@ -17,3 +17,5 @@ export const Checkbox = (props: CheckboxType) => {
         </>
     );
 };
+
+export default Checkbox

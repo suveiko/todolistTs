@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
-import './App.css';
-import {Todolist} from './Todolist';
+
 import {v1} from 'uuid';
+import Todolist from './Todolist';
 import AddItemForm from "./components/AddItemForm";
+
+import './App.css';
 
 export type FilterValuesType = "all" | "active" | "completed";
 type ToDoListsType = {
@@ -13,14 +15,14 @@ type ToDoListsType = {
 
 function App() {
 
-    let todolistID1 = v1();
-    let todolistID2 = v1();
+    const todolistID1 = v1();
+    const todolistID2 = v1();
 
-    let [toDoLists, setToDoLists] = useState<ToDoListsType[]>([
+    const [toDoLists, setToDoLists] = useState<ToDoListsType[]>([
         {id: todolistID1, title: 'What to learn', filter: 'all'},
         {id: todolistID2, title: 'What to buy', filter: 'all'},
     ])
-    let [tasks, setTasks] = useState({
+    const [tasks, setTasks] = useState({
         [todolistID1]: [
             {id: v1(), title: "HTML&CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},

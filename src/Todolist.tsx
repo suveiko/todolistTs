@@ -6,12 +6,11 @@ import Checkbox from "./components/Checkbox";
 import AddItemForm from "./components/AddItemForm";
 import EditableSpan from "./components/EditableSpan";
 
-type TaskType = {
+export type TaskType = {
     id: string
     title: string
     isDone: boolean
 }
-
 type PropsType = {
     title: string
     tasks: Array<TaskType>
@@ -52,22 +51,24 @@ function Todolist({
     const changeTodoListTitle = (title: string) => {
         changeTodolistTitle(title, toDoListId)
     }
+
     const itemTasks = tasks.length ? tasks.map(({id, isDone, title}) => {
-        const changeTaskTitleHandler = (title: string) => changeTaskTitle(id, title, toDoListId)
-        return (
-            <li key={id} className={isDone ? "is-done" : ""}>
-                <button onClick={() => onClickHandler(toDoListId, id)}>X</button>
-                <Checkbox
-                    callBack={(isDone) => onChangeHandlerCheck(toDoListId, id, isDone)}
-                    isDone={isDone}
-                />
-                <EditableSpan
-                    updateTitle={changeTaskTitleHandler}
-                    title={title}
-                />
-            </li>
-        )
-    }) : <span>Add new task!</span>
+            const changeTaskTitleHandler = (title: string) => changeTaskTitle(id, title, toDoListId)
+            return (
+                <li key={id} className={isDone ? "is-done" : ""}>
+                    <button onClick={() => onClickHandler(toDoListId, id)}>X</button>
+                    <Checkbox
+                        callBack={(isDone) => onChangeHandlerCheck(toDoListId, id, isDone)}
+                        isDone={isDone}
+                    />
+                    <EditableSpan
+                        updateTitle={changeTaskTitleHandler}
+                        title={title}
+                    />
+                </li>
+            )
+        })
+        : <span>Add new task!</span>
 
     return (
         <div>

@@ -5,7 +5,7 @@ import Todolist, {TaskType} from './Todolist';
 import AddItemForm from "./components/AddItemForm";
 
 import './App.css';
-import {AppBar, IconButton, Toolbar, Typography} from "@mui/material";
+import {AppBar, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 
 export type FilterValuesType = "all" | "active" | "completed";
@@ -111,20 +111,23 @@ function App() {
             if (filter === "completed") tasksForTodolist = tasksForTodolist.filter(t => t.isDone);
 
             return (
-                <Todolist
-                    key={id}
-                    toDoListId={id}
-                    title={title}
-                    tasks={tasksForTodolist}
-                    removeTask={removeTask}
-                    changeFilter={changeFilter}
-                    addTask={addTask}
-                    changeTaskStatus={changeStatus}
-                    filter={filter}
-                    removeToDoList={removeToDoList}
-                    changeTodolistTitle={changeTodolistTitle}
-                    changeTaskTitle={changeTaskTitle}
-                />
+                <Grid item key={id}>
+                    <Paper style={{padding: '10px'}}>
+                        <Todolist
+                            toDoListId={id}
+                            title={title}
+                            tasks={tasksForTodolist}
+                            removeTask={removeTask}
+                            changeFilter={changeFilter}
+                            addTask={addTask}
+                            changeTaskStatus={changeStatus}
+                            filter={filter}
+                            removeToDoList={removeToDoList}
+                            changeTodolistTitle={changeTodolistTitle}
+                            changeTaskTitle={changeTaskTitle}
+                        />
+                    </Paper>
+                </Grid>
             )
         })
         : <span>Add new TodoList!</span>
@@ -141,8 +144,14 @@ function App() {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <AddItemForm addTask={addTodoList}/>
-            {itemsTodoLists}
+            <Container fixed>
+                <Grid container style={{padding: '10px'}}>
+                    <AddItemForm addTask={addTodoList}/>
+                </Grid>
+                <Grid container spacing={10}>
+                    {itemsTodoLists}
+                </Grid>
+            </Container>
         </div>
     );
 }

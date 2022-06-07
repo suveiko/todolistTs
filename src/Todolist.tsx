@@ -5,6 +5,8 @@ import {FilterValuesType} from './App';
 import Checkbox from "./components/Checkbox";
 import AddItemForm from "./components/AddItemForm";
 import EditableSpan from "./components/EditableSpan";
+import {IconButton} from "@mui/material";
+import {Delete} from "@mui/icons-material";
 
 export type TaskType = {
     id: string
@@ -56,7 +58,7 @@ function Todolist({
             const changeTaskTitleHandler = (title: string) => changeTaskTitle(id, title, toDoListId)
             return (
                 <li key={id} className={isDone ? "is-done" : ""}>
-                    <button onClick={() => onClickHandler(toDoListId, id)}>X</button>
+
                     <Checkbox
                         callBack={(isDone) => onChangeHandlerCheck(toDoListId, id, isDone)}
                         isDone={isDone}
@@ -65,6 +67,9 @@ function Todolist({
                         updateTitle={changeTaskTitleHandler}
                         title={title}
                     />
+                    <IconButton onClick={() => onClickHandler(toDoListId, id)}>
+                        <Delete/>
+                    </IconButton>
                 </li>
             )
         })
@@ -74,7 +79,9 @@ function Todolist({
         <div>
             <h3>
                 <EditableSpan title={p.title} updateTitle={changeTodoListTitle}/>
-                <button onClick={removeToDoListHandler}>X</button>
+                <IconButton onClick={removeToDoListHandler}>
+                    <Delete/>
+                </IconButton>
             </h3>
             <AddItemForm addTask={addTaskHandler}/>
             <ul>

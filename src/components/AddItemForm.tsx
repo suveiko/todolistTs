@@ -1,16 +1,16 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 
 type AddItemFormType = {
-    callBack: (title: string) => void
+    addTask: (title: string) => void
 }
 
-const AddItemForm = ({callBack}: AddItemFormType) => {
+const AddItemForm = ({addTask}: AddItemFormType) => {
 
     const [title, setTitle] = useState("")
     const [error, setError] = useState(false)
 
     const addItem = () => {
-        title.trim() ? callBack(title.trim()) : setError(true)
+        title.trim() ? addTask(title.trim()) : setError(true)
         setTitle('')
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)

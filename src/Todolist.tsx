@@ -35,10 +35,12 @@ function Todolist({
                       toDoListId,
                       removeToDoList,
                       changeTodolistTitle,
+                      addTask,
+                      changeTaskTitle,
                       ...p
                   }: PropsType) {
 
-    const addTask = (title: string) => p.addTask(toDoListId, title)
+    const addTaskHandler = (title: string) => addTask(toDoListId, title)
     const removeToDoListHandler = () => removeToDoList(toDoListId)
     const onChangeHandlerCheck = (toDoId: string, tId: string, event: boolean) => {
         changeTaskStatus(toDoId, tId, event);
@@ -50,6 +52,22 @@ function Todolist({
     const changeTodoListTitle = (title: string) => {
         changeTodolistTitle(title, toDoListId)
     }
+    const itemTasks = tasks.length ? tasks.map(({id, isDone, title}) => {
+        const changeTaskTitleHandler = (title: string) => changeTaskTitle(id, title, toDoListId)
+        return (
+            <li key={id} className={isDone ? "is-done" : ""}>
+                <button onClick={() => onClickHandler(toDoListId, id)}>X</button>
+                <Checkbox
+                    callBack={(isDone) => onChangeHandlerCheck(toDoListId, id, isDone)}
+                    isDone={isDone}
+                />
+                <EditableSpan
+                    updateTitle={changeTaskTitleHandler}
+                    title={title}
+                />
+            </li>
+        )
+    }) : <span>Add new task!</span>
 
     return (
         <div>
@@ -57,24 +75,9 @@ function Todolist({
                 <EditableSpan title={p.title} updateTitle={changeTodoListTitle}/>
                 <button onClick={removeToDoListHandler}>X</button>
             </h3>
-            <AddItemForm callBack={addTask}/>
+            <AddItemForm addTask={addTaskHandler}/>
             <ul>
-                {tasks.map(({id, isDone, title}) => {
-                    const changeTaskTitle = (title: string) => p.changeTaskTitle(id, title, toDoListId)
-                    return (
-                        <li key={id} className={isDone ? "is-done" : ""}>
-                            <button onClick={() => onClickHandler(toDoListId, id)}>X</button>
-                            <Checkbox
-                                callBack={(isDone) => onChangeHandlerCheck(toDoListId, id, isDone)}
-                                isDone={isDone}
-                            />
-                            <EditableSpan
-                                updateTitle={changeTaskTitle}
-                                title={title}
-                            />
-                        </li>
-                    )
-                })}
+                {itemTasks}
             </ul>
             <div>
                 <button className={filter === 'all' ? "active-filter" : ""}

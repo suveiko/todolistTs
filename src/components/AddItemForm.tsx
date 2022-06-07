@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {Button} from "@mui/material";
+import {Button, TextField} from "@mui/material";
 
 type AddItemFormType = {
     addTask: (title: string) => void
@@ -22,21 +22,23 @@ const AddItemForm = ({addTask}: AddItemFormType) => {
 
     return (
         <div>
-            <input
+            <TextField
+                variant={"outlined"}
+                label={'Type value'}
                 value={title}
                 onChange={onChangeHandler}
                 onKeyUp={onKeyPressHandler}
-                className={error ? "error" : ""}
+                error={error}
+                helperText={error ? 'Title is required' : ''}
             />
             <Button
                 variant={"contained"}
-                style={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px'}}
+                style={{maxWidth: '50px', maxHeight: '50px', minWidth: '50px', minHeight: '50px'}}
                 color={"primary"}
                 onClick={addItem}
                 disabled={title.trim() === ''}
             >+
             </Button>
-            {error && <div style={{color: 'red'}}>Title is required</div>}
         </div>
     );
 };

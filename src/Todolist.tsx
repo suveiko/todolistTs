@@ -2,10 +2,10 @@ import React from 'react';
 
 import {FilterValuesType} from './App';
 
-import Checkbox from "./components/Checkbox";
+import CheckboxForm from "./components/CheckboxForm";
 import AddItemForm from "./components/AddItemForm";
 import EditableSpan from "./components/EditableSpan";
-import {IconButton} from "@mui/material";
+import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 
 export type TaskType = {
@@ -59,7 +59,7 @@ function Todolist({
             return (
                 <li key={id} className={isDone ? "is-done" : ""}>
 
-                    <Checkbox
+                    <CheckboxForm
                         callBack={(isDone) => onChangeHandlerCheck(toDoListId, id, isDone)}
                         isDone={isDone}
                     />
@@ -88,15 +88,15 @@ function Todolist({
                 {itemTasks}
             </ul>
             <div>
-                <button className={filter === 'all' ? "active-filter" : ""}
+                <Button variant={filter === 'all' ? "contained" : "text"}
                         onClick={onAllClickHandler}>All
-                </button>
-                <button className={filter === 'active' ? "active-filter" : ""}
+                </Button>
+                <Button variant={filter === 'active' ? "contained" : "text"}
                         onClick={onActiveClickHandler}>Active
-                </button>
-                <button className={filter === 'completed' ? "active-filter" : ""}
+                </Button>
+                <Button variant={filter === 'completed' ? "contained" : "text"}
                         onClick={onCompletedClickHandler}>Completed
-                </button>
+                </Button>
             </div>
         </div>
     )

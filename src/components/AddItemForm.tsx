@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {Button, TextField} from "@mui/material";
+import {IconButton, TextField} from "@mui/material";
+import {ControlPoint} from "@mui/icons-material";
 
 type AddItemFormType = {
     addTask: (title: string) => void
@@ -31,14 +32,13 @@ const AddItemForm = ({addTask}: AddItemFormType) => {
                 error={error}
                 helperText={error ? 'Title is required' : ''}
             />
-            <Button
-                variant={"contained"}
-                style={{maxWidth: '50px', maxHeight: '50px', minWidth: '50px', minHeight: '50px'}}
+            <IconButton
                 color={"primary"}
                 onClick={addItem}
                 disabled={title.trim() === ''}
-            >+
-            </Button>
+            >
+                <ControlPoint/>
+            </IconButton>
         </div>
     );
 };

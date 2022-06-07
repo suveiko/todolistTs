@@ -5,6 +5,8 @@ import Todolist, {TaskType} from './Todolist';
 import AddItemForm from "./components/AddItemForm";
 
 import './App.css';
+import {AppBar, IconButton, Toolbar, Typography} from "@mui/material";
+import {Menu} from "@mui/icons-material";
 
 export type FilterValuesType = "all" | "active" | "completed";
 type ToDoListsType = {
@@ -129,6 +131,16 @@ function App() {
 
     return (
         <div className="App">
+            <AppBar position="static">
+                <Toolbar variant="dense">
+                    <IconButton edge="start" color="inherit" aria-label="menu" sx={{mr: 2}}>
+                        <Menu/>
+                    </IconButton>
+                    <Typography variant="h6" color="inherit" component="div">
+                        Menu
+                    </Typography>
+                </Toolbar>
+            </AppBar>
             <AddItemForm addTask={addTodoList}/>
             {itemsTodoLists}
         </div>

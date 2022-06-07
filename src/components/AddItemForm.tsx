@@ -1,28 +1,22 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 
 type AddItemFormType = {
-    addItem: (title: string) => void
+    callBack: (title: string) => void
 }
 
-const AddItemForm = (p: AddItemFormType) => {
+const AddItemForm = ({callBack}: AddItemFormType) => {
 
     const [title, setTitle] = useState("")
     const [error, setError] = useState(false)
 
     const addItem = () => {
-        if (title.trim()) {
-            p.addItem(title.trim())
-        } else {
-            setError(true)
-        }
+        title.trim() ? callBack(title.trim()) : setError(true)
         setTitle('')
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         setError(false)
-        if (e.key === 'Enter') {
-            addItem();
-        }
+        e.key === 'Enter' && addItem();
     }
 
     return (

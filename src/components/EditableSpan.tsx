@@ -22,13 +22,15 @@ const EditableSpan = ({title, updateTitle}: EditableSpanType) => {
             ? <input
                 value={newTitle}
                 style={{width: '80px'}}
-                autoFocus onBlur={offEditorMode}
+                autoFocus
+                onBlur={offEditorMode}
                 onChange={onChangeHandler}
             />
             : <span
                 style={{cursor: 'pointer'}}
                 onDoubleClick={onEditorMode}
-            >{title}</span>
+            >{title}
+        </span>
     );
 };
 

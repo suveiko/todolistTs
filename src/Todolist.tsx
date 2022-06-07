@@ -27,16 +27,16 @@ type PropsType = {
 }
 
 function Todolist({
-                             tasks,
-                             removeTask,
-                             changeFilter,
-                             changeTaskStatus,
-                             filter,
-                             toDoListId,
-                             removeToDoList,
-                             changeTodolistTitle,
-                             ...p
-                         }: PropsType) {
+                      tasks,
+                      removeTask,
+                      changeFilter,
+                      changeTaskStatus,
+                      filter,
+                      toDoListId,
+                      removeToDoList,
+                      changeTodolistTitle,
+                      ...p
+                  }: PropsType) {
 
     const addTask = (title: string) => p.addTask(toDoListId, title)
     const removeToDoListHandler = () => removeToDoList(toDoListId)
@@ -57,12 +57,10 @@ function Todolist({
                 <EditableSpan title={p.title} updateTitle={changeTodoListTitle}/>
                 <button onClick={removeToDoListHandler}>X</button>
             </h3>
-            <AddItemForm addItem={addTask}/>
+            <AddItemForm callBack={addTask}/>
             <ul>
                 {tasks.map(({id, isDone, title}) => {
-                    const changeTaskTitle = (title: string) => {
-                        p.changeTaskTitle(id, title, toDoListId)
-                    }
+                    const changeTaskTitle = (title: string) => p.changeTaskTitle(id, title, toDoListId)
                     return (
                         <li key={id} className={isDone ? "is-done" : ""}>
                             <button onClick={() => onClickHandler(toDoListId, id)}>X</button>

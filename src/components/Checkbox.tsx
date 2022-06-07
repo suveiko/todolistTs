@@ -5,15 +5,17 @@ type CheckboxType = {
     isDone: boolean
 }
 
-const Checkbox = (props: CheckboxType) => {
+const Checkbox = ({isDone, callBack}: CheckboxType) => {
+
     const onChangeHandlerCheck = (event: ChangeEvent<HTMLInputElement>) => {
-        props.callBack(event.currentTarget.checked)
+        callBack(event.currentTarget.checked)
     }
+
     return (
         <>
             <input type="checkbox"
                    onChange={onChangeHandlerCheck}
-                   checked={props.isDone}/>
+                   checked={isDone}/>
         </>
     );
 };

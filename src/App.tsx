@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 
 import {v1} from 'uuid';
+import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
+import {Menu} from "@mui/icons-material";
+
 import Todolist, {TaskType} from './Todolist';
 import AddItemForm from "./components/AddItemForm";
 
 import './App.css';
-import {AppBar, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
-import {Menu} from "@mui/icons-material";
+
 
 export type FilterValuesType = "all" | "active" | "completed";
 type ToDoListsType = {
@@ -104,51 +106,58 @@ function App() {
         })
     }
 
-    const itemsTodoLists = todoLists.length ? todoLists.map(({filter, id, title}) => {
+    const itemsTodoLists = todoLists.map(({filter, id, title}) => {
 
-            let tasksForTodolist = tasks[id];
-            if (filter === "active") tasksForTodolist = tasksForTodolist.filter(t => !t.isDone);
-            if (filter === "completed") tasksForTodolist = tasksForTodolist.filter(t => t.isDone);
+        let tasksForTodolist = tasks[id];
+        if (filter === "active") tasksForTodolist = tasksForTodolist.filter(t => !t.isDone);
+        if (filter === "completed") tasksForTodolist = tasksForTodolist.filter(t => t.isDone);
 
-            return (
-                <Grid item key={id}>
-                    <Paper style={{padding: '10px'}}>
-                        <Todolist
-                            toDoListId={id}
-                            title={title}
-                            tasks={tasksForTodolist}
-                            removeTask={removeTask}
-                            changeFilter={changeFilter}
-                            addTask={addTask}
-                            changeTaskStatus={changeStatus}
-                            filter={filter}
-                            removeToDoList={removeToDoList}
-                            changeTodolistTitle={changeTodolistTitle}
-                            changeTaskTitle={changeTaskTitle}
-                        />
-                    </Paper>
-                </Grid>
-            )
-        })
-        : <span>Add new TodoList!</span>
+        return (
+            <Grid
+                item
+                key={id}
+            >
+                <Paper
+                    elevation={8}
+                    style={{padding: '20px'}}
+                    square
+                >
+                    <Todolist
+                        toDoListId={id}
+                        title={title}
+                        tasks={tasksForTodolist}
+                        removeTask={removeTask}
+                        changeFilter={changeFilter}
+                        addTask={addTask}
+                        changeTaskStatus={changeStatus}
+                        filter={filter}
+                        removeToDoList={removeToDoList}
+                        changeTodolistTitle={changeTodolistTitle}
+                        changeTaskTitle={changeTaskTitle}
+                    />
+                </Paper>
+            </Grid>
+        )
+    })
 
     return (
         <div className="App">
             <AppBar position="static">
-                <Toolbar variant="dense">
-                    <IconButton edge="start" color="inherit" aria-label="menu" sx={{mr: 2}}>
+                <Toolbar style={{justifyContent: "space-between"}}>
+                    <IconButton edge="start" color="inherit" aria-label="menu">
                         <Menu/>
                     </IconButton>
-                    <Typography variant="h6" color="inherit" component="div">
-                        Menu
+                    <Typography variant="h6">
+                        TodoLists
                     </Typography>
+                    <Button color="inherit" variant={"outlined"}>Login</Button>
                 </Toolbar>
             </AppBar>
             <Container fixed>
-                <Grid container style={{padding: '10px'}}>
+                <Grid container style={{padding: '15px 0px'}}>
                     <AddItemForm addTask={addTodoList}/>
                 </Grid>
-                <Grid container spacing={10}>
+                <Grid container spacing={4}>
                     {itemsTodoLists}
                 </Grid>
             </Container>

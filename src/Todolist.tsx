@@ -1,12 +1,13 @@
 import React from 'react';
 
-import {FilterValuesType} from './App';
+import {Button, IconButton} from "@mui/material";
+import {Delete} from "@mui/icons-material";
 
+import {FilterValuesType} from './App';
 import CheckboxForm from "./components/CheckboxForm";
 import AddItemForm from "./components/AddItemForm";
 import EditableSpan from "./components/EditableSpan";
-import {Button, IconButton} from "@mui/material";
-import {Delete} from "@mui/icons-material";
+
 
 export type TaskType = {
     id: string
@@ -54,26 +55,25 @@ function Todolist({
         changeTodolistTitle(title, toDoListId)
     }
 
-    const itemTasks = tasks.length ? tasks.map(({id, isDone, title}) => {
-            const changeTaskTitleHandler = (title: string) => changeTaskTitle(id, title, toDoListId)
-            return (
-                <li key={id} className={isDone ? "is-done" : ""}>
+    const itemTasks = tasks.map(({id, isDone, title}) => {
+        const changeTaskTitleHandler = (title: string) => changeTaskTitle(id, title, toDoListId)
+        return (
+            <li key={id} className={isDone ? "is-done" : ""}>
 
-                    <CheckboxForm
-                        callBack={(isDone) => onChangeHandlerCheck(toDoListId, id, isDone)}
-                        isDone={isDone}
-                    />
-                    <EditableSpan
-                        updateTitle={changeTaskTitleHandler}
-                        title={title}
-                    />
-                    <IconButton onClick={() => onClickHandler(toDoListId, id)}>
-                        <Delete/>
-                    </IconButton>
-                </li>
-            )
-        })
-        : <span>Add new task!</span>
+                <CheckboxForm
+                    callBack={(isDone) => onChangeHandlerCheck(toDoListId, id, isDone)}
+                    isDone={isDone}
+                />
+                <EditableSpan
+                    updateTitle={changeTaskTitleHandler}
+                    title={title}
+                />
+                <IconButton onClick={() => onClickHandler(toDoListId, id)}>
+                    <Delete/>
+                </IconButton>
+            </li>
+        )
+    })
 
     return (
         <div>
@@ -88,14 +88,20 @@ function Todolist({
                 {itemTasks}
             </ul>
             <div>
-                <Button variant={filter === 'all' ? "contained" : "text"}
-                        onClick={onAllClickHandler}>All
+                <Button
+                    variant={filter === 'all' ? "contained" : "text"}
+                    onClick={onAllClickHandler}
+                >All
                 </Button>
-                <Button variant={filter === 'active' ? "contained" : "text"}
-                        onClick={onActiveClickHandler}>Active
+                <Button
+                    variant={filter === 'active' ? "contained" : "text"}
+                    onClick={onActiveClickHandler}
+                >Active
                 </Button>
-                <Button variant={filter === 'completed' ? "contained" : "text"}
-                        onClick={onCompletedClickHandler}>Completed
+                <Button
+                    variant={filter === 'completed' ? "contained" : "text"}
+                    onClick={onCompletedClickHandler}
+                >Completed
                 </Button>
             </div>
         </div>

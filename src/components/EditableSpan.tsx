@@ -21,6 +21,7 @@ const EditableSpan = ({title, updateTitle}: EditableSpanType) => {
     return (
         editMode
             ? <TextField
+                variant={'standard'}
                 value={newTitle}
                 autoFocus
                 onBlur={offEditorMode}

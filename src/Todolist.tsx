@@ -17,15 +17,17 @@ export type TaskType = {
 type PropsType = {
     title: string
     tasks: Array<TaskType>
+    toDoListId: string
+    filter: FilterValuesType
+
     removeTask: (toDoId: string, taskId: string) => void
     changeFilter: (toDoId: string, value: FilterValuesType) => void
     addTask: (toDoId: string, title: string) => void
     changeTaskStatus: (toDoId: string, taskId: string, isDone: boolean) => void
-    filter: FilterValuesType
-    toDoListId: string
+    changeTaskTitle: (taskId: string, title: string, toDoId: string) => void
+
     removeToDoList: (toDoId: string) => void
     changeTodolistTitle: (title: string, id: string) => void
-    changeTaskTitle: (taskId: string, title: string, toDoId: string) => void
 }
 
 function Todolist({
@@ -42,24 +44,25 @@ function Todolist({
                       ...p
                   }: PropsType) {
 
-    const addTaskHandler = (title: string) => addTask(toDoListId, title)
-    const removeToDoListHandler = () => removeToDoList(toDoListId)
     const onChangeHandlerCheck = (toDoId: string, tId: string, event: boolean) => {
         changeTaskStatus(toDoId, tId, event);
     }
     const onClickHandler = (toDoId: string, tId: string) => removeTask(toDoId, tId)
-    const onAllClickHandler = () => changeFilter(toDoListId, "all");
-    const onActiveClickHandler = () => changeFilter(toDoListId, "active");
-    const onCompletedClickHandler = () => changeFilter(toDoListId, "completed");
+    const addTaskHandler = (title: string) => addTask(toDoListId, title)
+
     const changeTodoListTitle = (title: string) => {
         changeTodolistTitle(title, toDoListId)
     }
+    const removeToDoListHandler = () => removeToDoList(toDoListId)
+
+    const onAllClickHandler = () => changeFilter(toDoListId, "all");
+    const onActiveClickHandler = () => changeFilter(toDoListId, "active");
+    const onCompletedClickHandler = () => changeFilter(toDoListId, "completed");
 
     const itemTasks = tasks.map(({id, isDone, title}) => {
         const changeTaskTitleHandler = (title: string) => changeTaskTitle(id, title, toDoListId)
         return (
             <li key={id} className={isDone ? "is-done" : ""}>
-
                 <CheckboxForm
                     callBack={(isDone) => onChangeHandlerCheck(toDoListId, id, isDone)}
                     isDone={isDone}

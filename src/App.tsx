@@ -116,7 +116,7 @@ function App() {
             title: title,
             filter: 'all'
         }
-        setToDoLists([newTodoList, ...todoLists])
+        setToDoLists([...todoLists, newTodoList])
         setTasks({...tasks, [newTodoListId]: []})
     }
 
@@ -133,7 +133,7 @@ function App() {
             >
                 <Paper
                     elevation={8}
-                    style={{padding: '20px'}}
+                    style={{padding: '30px'}}
                     square
                 >
                     <Todolist

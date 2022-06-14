@@ -1,6 +1,11 @@
 import {TasksStateType} from "../App";
 import {v1} from "uuid";
 
+type ActionType = RemoveTaskActionType
+    | AddTaskActionType
+    | ChangeStatusActionType
+    | ChangeTaskTitleActionType
+
 type RemoveTaskActionType = {
     type: 'REMOVE-TASK'
     id: string
@@ -17,7 +22,12 @@ type ChangeStatusActionType = {
     id: string
     isDone: boolean
 }
-type ActionType = RemoveTaskActionType | AddTaskActionType | ChangeStatusActionType
+type ChangeTaskTitleActionType = {
+    type: 'CHANGE-TASK-TITLE'
+    todoId: string
+    id: string
+    title: string
+}
 
 export const taskReducer = (state: TasksStateType, action: ActionType): TasksStateType => {
     switch (action.type) {
@@ -38,6 +48,14 @@ export const taskReducer = (state: TasksStateType, action: ActionType): TasksSta
                 [action.todoId]: state[action.todoId]
                     .map(t => t.id === action.id ? {...t, isDone: action.isDone} : t)
             }
+        case "CHANGE-TASK-TITLE":
+            return {
+                ...state,
+                [action.todoId]: state[action.todoId]
+                    .map(t => t.id === action.id ? {...t, title: action.title} : t)
+            }
+        default:
+            throw new Error('I don\'t understand this type')
     }
 }
 
@@ -49,4 +67,7 @@ export const AddTaskAC = (todoId: string, title: string): AddTaskActionType => {
 }
 export const ChangeTaskStatusAC = (todoId: string, taskId: string, isDone: boolean): ChangeStatusActionType => {
     return {type: 'CHANGE-TASK-STATUS', todoId: todoId, id: taskId, isDone: isDone}
+}
+export const ChangeTaskTitleAC = (todoId: string, taskId: string, newTitle: string): ChangeTaskTitleActionType => {
+    return {type: 'CHANGE-TASK-TITLE', todoId: todoId, id: taskId, title: newTitle}
 }

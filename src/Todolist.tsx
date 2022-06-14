@@ -31,17 +31,9 @@ type PropsType = {
 }
 
 function Todolist({
-                      tasks,
-                      removeTask,
-                      changeFilter,
-                      changeTaskStatus,
-                      filter,
-                      toDoListId,
-                      removeToDoList,
-                      changeTodolistTitle,
-                      addTask,
-                      changeTaskTitle,
-                      ...p
+                      tasks, removeTask, changeFilter, changeTaskStatus, filter,
+                      toDoListId, removeToDoList, changeTodolistTitle, addTask,
+                      changeTaskTitle, ...p
                   }: PropsType) {
 
     const onChangeHandlerCheck = (toDoId: string, tId: string, event: boolean) => {

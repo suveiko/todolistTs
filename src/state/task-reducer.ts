@@ -1,5 +1,7 @@
-import {TasksStateType} from "../App";
 import {v1} from "uuid";
+
+import {TasksStateType} from "../App";
+
 
 type ActionType = RemoveTaskActionType
     | AddTaskActionType
@@ -28,6 +30,7 @@ type ChangeTaskTitleActionType = {
     id: string
     title: string
 }
+
 
 export const taskReducer = (state: TasksStateType, action: ActionType): TasksStateType => {
     switch (action.type) {

@@ -69,7 +69,7 @@ function App() {
                 t => t.id === taskId ?
                     {
                         ...t,
-                        isDone
+                        isDone: isDone
                     }
                     : t)
         })

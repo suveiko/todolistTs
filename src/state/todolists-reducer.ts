@@ -3,29 +3,28 @@ import {v1} from "uuid";
 import {FilterValuesType, TodoListsType} from "../App";
 
 
-type ActionType = RemoveTodoListActionType
-    | AddTodoListActionType
-    | ChangeTodoListActionType
-    | ChangeTodoListFilterActionType
-
-type RemoveTodoListActionType = {
+type RemoveTodoListAT = {
     type: 'REMOVE-TODOLIST'
     id: string
 }
-type AddTodoListActionType = {
+type AddTodoListAT = {
     type: 'ADD-TODOLIST'
     title: string
 }
-type ChangeTodoListActionType = {
+type ChangeTodoListAT = {
     type: 'CHANGE-TODOLIST-TITLE'
     id: string
     title: string
 }
-type ChangeTodoListFilterActionType = {
+type ChangeTodoListFilterAT = {
     type: 'CHANGE-TODOLIST-FILTER'
     id: string
     filter: FilterValuesType
 }
+type ActionType = RemoveTodoListAT
+    | AddTodoListAT
+    | ChangeTodoListAT
+    | ChangeTodoListFilterAT
 
 
 export const todoListsReducer = (state: TodoListsType[], action: ActionType): TodoListsType[] => {
@@ -43,15 +42,15 @@ export const todoListsReducer = (state: TodoListsType[], action: ActionType): To
     }
 }
 
-export const removeTodolistAC = (todoId: string): RemoveTodoListActionType => {
+export const removeTodolistAC = (todoId: string): RemoveTodoListAT => {
     return {type: 'REMOVE-TODOLIST', id: todoId}
 }
-export const addTodoListAC = (newTitle: string): AddTodoListActionType => {
+export const addTodoListAC = (newTitle: string): AddTodoListAT => {
     return {type: 'ADD-TODOLIST', title: newTitle}
 }
-export const changeTodoListAC = (todoId: string, newTitle: string): ChangeTodoListActionType => {
+export const changeTodoListAC = (todoId: string, newTitle: string): ChangeTodoListAT => {
     return {type: 'CHANGE-TODOLIST-TITLE', id: todoId, title: newTitle}
 }
-export const changeTodoListFilterAC = (todoId: string, newFilter: FilterValuesType): ChangeTodoListFilterActionType => {
+export const changeTodoListFilterAC = (todoId: string, newFilter: FilterValuesType): ChangeTodoListFilterAT => {
     return {type: 'CHANGE-TODOLIST-FILTER', id: todoId, filter: newFilter}
 }

@@ -5,7 +5,7 @@ import {
     removeTodolistAC, todoListsReducer
 } from './todolists-reducer'
 import {FilterValuesType, TasksStateType, TodoListsType} from '../App'
-import {addTodolistAC, tasksReducer} from "./tasks-reducer";
+import { tasksReducer} from "./tasks-reducer";
 
 
 test('correct todolist should be removed', () => {
@@ -72,7 +72,7 @@ test('ids should be equals', () => {
     const startTasksState: TasksStateType = {}
     const startTodoListsState: TodoListsType[] = []
 
-    const action = addTodolistAC('new todolist')
+    const action = addTodoListAC('new todolist')
 
     const endTasksState = tasksReducer(startTasksState, action)
     const endTodoListsState = todoListsReducer(startTodoListsState, action)

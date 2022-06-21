@@ -3,13 +3,10 @@ import {v1} from "uuid";
 import {TasksStateType} from "../App";
 
 import {
-    addTaskAC,
-    addTodolistAC,
-    changeTaskStatusAC,
-    changeTaskTitleAC,
-    removeTaskAC,
-    tasksReducer
+    addTaskAC, changeTaskStatusAC, changeTaskTitleAC,
+    removeTaskAC, tasksReducer
 } from "./tasks-reducer";
+import {addTodoListAC} from "./todolists-reducer";
 
 
 test('correct task should be removed', () => {
@@ -142,7 +139,7 @@ test('new array should be added when new todolist is added', () => {
         ]
     }
 
-    const action = addTodolistAC('new todolist')
+    const action = addTodoListAC('new todolist')
 
     const endState = tasksReducer(startState, action)
 

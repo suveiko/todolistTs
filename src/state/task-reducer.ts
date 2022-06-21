@@ -58,7 +58,7 @@ export const taskReducer = (state: TasksStateType, action: ActionType): TasksSta
                     .map(t => t.id === action.id ? {...t, title: action.title} : t)
             }
         default:
-            throw new Error('I don\'t understand this type')
+            return state
     }
 }
 

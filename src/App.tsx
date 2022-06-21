@@ -11,7 +11,7 @@ import './App.css';
 
 
 export type FilterValuesType = "all" | "active" | "completed";
-export type ToDoListsType = {
+export type TodoListsType = {
     id: string
     title: string
     filter: FilterValuesType
@@ -25,7 +25,7 @@ function App() {
     const todolistID1 = v1();
     const todolistID2 = v1();
 
-    const [todoLists, setToDoLists] = useState<ToDoListsType[]>([
+    const [todoLists, setToDoLists] = useState<TodoListsType[]>([
         {id: todolistID1, title: 'What to learn', filter: 'all'},
         {id: todolistID2, title: 'What to buy', filter: 'all'},
     ])
@@ -111,7 +111,7 @@ function App() {
     }
     const addTodoList = (title: string) => {
         const newTodoListId = v1()
-        const newTodoList: ToDoListsType = {
+        const newTodoList: TodoListsType = {
             id: newTodoListId,
             title: title,
             filter: 'all'

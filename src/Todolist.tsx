@@ -4,6 +4,7 @@ import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 
 import {FilterValuesType} from './App';
+
 import CheckboxForm from "./components/CheckboxForm";
 import AddItemForm from "./components/AddItemForm";
 import EditableSpan from "./components/EditableSpan";

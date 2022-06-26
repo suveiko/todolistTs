@@ -41,7 +41,9 @@ function Todolist({
         changeTaskStatus(toDoId, tId, event);
     }
     const onClickHandler = (toDoId: string, tId: string) => removeTask(toDoId, tId)
-    const addTaskHandler = (title: string) => addTask(toDoListId, title)
+    const addTaskHandler = (title: string) => {
+        addTask(toDoListId, title)
+    }
 
     const changeTodoListTitle = (title: string) => {
         changeTodolistTitle(title, toDoListId)

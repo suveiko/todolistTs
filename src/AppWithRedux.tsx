@@ -9,7 +9,6 @@ import Todolist, {TaskType} from './Todolist';
 import AddItemForm from "./components/AddItemForm";
 
 import './App.css';
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/tasks-reducer";
 import {
     addTodoListAC,
     changeTodoListAC,
@@ -33,21 +32,6 @@ function AppWithRedux() {
 
     const dispatch = useDispatch()
     const todoLists = useSelector<AppRootState, TodoListsType[]>(state => state.todoLists)
-    const tasks = useSelector<AppRootState, TasksStateType>(state => state.tasks)
-
-
-    const removeTask = (toDoId: string, id: string) => {
-        dispatch(removeTaskAC(toDoId, id))
-    }
-    const addTask = (toDoId: string, title: string) => {
-        dispatch(addTaskAC(toDoId, title))
-    }
-    const changeStatus = (toDoId: string, taskId: string, isDone: boolean) => {
-        dispatch(changeTaskStatusAC(toDoId, taskId, isDone))
-    }
-    const changeTaskTitle = (taskId: string, title: string, toDoId: string) => {
-        dispatch(changeTaskTitleAC(toDoId, taskId, title))
-    }
 
     const changeFilter = (toDoId: string, value: FilterValuesType) => {
         dispatch(changeTodoListFilterAC(toDoId, value))
@@ -65,10 +49,6 @@ function AppWithRedux() {
 
     const itemsTodoLists = todoLists.map(({filter, id, title}) => {
 
-        let tasksForTodolist = tasks[id];
-        if (filter === "active") tasksForTodolist = tasksForTodolist.filter(t => !t.isDone);
-        if (filter === "completed") tasksForTodolist = tasksForTodolist.filter(t => t.isDone);
-
         return (
             <Grid
                 item
@@ -83,14 +63,8 @@ function AppWithRedux() {
                         title={title}
                         toDoListId={id}
                         filter={filter}
-                        tasks={tasksForTodolist}
 
-                        removeTask={removeTask}
                         changeFilter={changeFilter}
-                        addTask={addTask}
-                        changeTaskStatus={changeStatus}
-                        changeTaskTitle={changeTaskTitle}
-
                         removeToDoList={removeToDoList}
                         changeTodolistTitle={changeTodolistTitle}
                     />

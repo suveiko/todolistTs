@@ -1,16 +1,17 @@
 import React from 'react';
+import {useDispatch, useSelector} from "react-redux";
 
 import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
+
+import {AppRootState} from "./state/store";
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/tasks-reducer";
 
 import {FilterValuesType} from './AppWithRedux';
 
 import CheckboxForm from "./components/CheckboxForm";
 import AddItemForm from "./components/AddItemForm";
 import EditableSpan from "./components/EditableSpan";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootState} from "./state/store";
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/tasks-reducer";
 
 
 export type TaskType = {
@@ -30,7 +31,8 @@ type PropsType = {
 
 function Todolist({
                       changeFilter, filter,
-                      toDoListId, removeToDoList, changeTodolistTitle, ...p
+                      toDoListId, removeToDoList,
+                      changeTodolistTitle, ...p
                   }: PropsType) {
 
 

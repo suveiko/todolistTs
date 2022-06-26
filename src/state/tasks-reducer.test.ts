@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 
-import {TasksStateType} from "../AppWithRedux";
+import {TasksStateType} from "../App";
 
 import {
     addTaskAC, changeTaskStatusAC, changeTaskTitleAC,
@@ -139,7 +139,7 @@ test('new array should be added when new todolist is added', () => {
         ]
     }
 
-    const action = addTodoListAC('new todolist', v1())
+    const action = addTodoListAC('new todolist')
 
     const endState = tasksReducer(startState, action)
 

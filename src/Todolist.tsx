@@ -7,7 +7,7 @@ import {Delete} from "@mui/icons-material";
 import {AppRootState} from "./state/store";
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/tasks-reducer";
 
-import {FilterValuesType} from './AppWithRedux';
+import {FilterValuesType} from './App';
 
 import CheckboxForm from "./components/CheckboxForm";
 import AddItemForm from "./components/AddItemForm";

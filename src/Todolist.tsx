@@ -43,8 +43,12 @@ export const Todolist = React.memo(({
     if (filter === "completed") tasks = tasks.filter(t => t.isDone);
 
 
-    const changeTodoListTitle = (title: string) => changeTodolistTitle(title, toDoListId)
-    const removeToDoListHandler = () => removeToDoList(toDoListId)
+    const changeTodoListTitle = useCallback((title: string) => {
+        changeTodolistTitle(title, toDoListId)
+    }, [changeTodolistTitle, toDoListId])
+    const removeToDoListHandler = useCallback(() => {
+        removeToDoList(toDoListId)
+    }, [removeToDoList, toDoListId])
 
     const onAllClickHandler = () => changeFilter(toDoListId, "all");
     const onActiveClickHandler = () => changeFilter(toDoListId, "active");
@@ -52,7 +56,7 @@ export const Todolist = React.memo(({
 
     const addTask = useCallback((title: string) => {
         dispatch(addTaskAC(toDoListId, title))
-    }, [])
+    }, [dispatch])
 
     const itemTasks = tasks.map(({id, isDone, title}) => {
         const changeTaskTitleHandler = (title: string) => dispatch(changeTaskTitleAC(toDoListId, id, title))

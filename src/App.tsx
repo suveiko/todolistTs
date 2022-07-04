@@ -34,16 +34,16 @@ function App() {
 
     const changeFilter = useCallback((toDoId: string, value: FilterValuesType) => {
         dispatch(changeTodoListFilterAC(toDoId, value))
-    },[])
+    },[dispatch])
     const changeTodolistTitle = useCallback((title: string, id: string) => {
         dispatch(changeTodoListAC(id, title))
-    },[])
+    },[dispatch])
     const removeToDoList = useCallback((toDoId: string) => {
         dispatch(removeTodoListAC(toDoId))
-    },[])
+    },[dispatch])
     const addTodoList = useCallback((title: string) => {
         dispatch(addTodoListAC(title))
-    }, [])
+    }, [dispatch])
 
     const itemsTodoLists = todoLists.map(({filter, id, title}) => {
 

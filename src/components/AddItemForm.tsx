@@ -9,6 +9,7 @@ type AddItemFormType = {
 }
 
 const AddItemForm = ({addTask}: AddItemFormType) => {
+    console.log('add item form')
 
     const [title, setTitle] = useState("")
     const [error, setError] = useState(false)
@@ -19,7 +20,8 @@ const AddItemForm = ({addTask}: AddItemFormType) => {
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(false)
+        error && setError(false)
+
         e.key === 'Enter' && addItem();
     }
 

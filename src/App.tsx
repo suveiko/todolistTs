@@ -31,18 +31,10 @@ function App() {
     const dispatch = useDispatch()
     const todoLists = useSelector<AppRootState, TodoListsType[]>(state => state.todoLists)
 
-    const changeFilter = (toDoId: string, value: FilterValuesType) => {
-        dispatch(changeTodoListFilterAC(toDoId, value))
-    }
-    const changeTodolistTitle = (title: string, id: string) => {
-        dispatch(changeTodoListAC(id, title))
-    }
-    const removeToDoList = (toDoId: string) => {
-        dispatch(removeTodoListAC(toDoId))
-    }
-    const addTodoList = (title: string) => {
-        dispatch(addTodoListAC(title))
-    }
+    const changeFilter = (toDoId: string, value: FilterValuesType) => dispatch(changeTodoListFilterAC(toDoId, value))
+    const changeTodolistTitle = (title: string, id: string) => dispatch(changeTodoListAC(id, title))
+    const removeToDoList = (toDoId: string) => dispatch(removeTodoListAC(toDoId))
+    const addTodoList = (title: string) => dispatch(addTodoListAC(title))
 
     const itemsTodoLists = todoLists.map(({filter, id, title}) => {
 

@@ -9,9 +9,7 @@ type CheckboxType = {
 
 const CheckboxForm = ({isDone, callBack}: CheckboxType) => {
 
-    const onChangeHandlerCheck = (event: ChangeEvent<HTMLInputElement>) => {
-        callBack(event.currentTarget.checked)
-    }
+    const onChangeHandlerCheck = (event: ChangeEvent<HTMLInputElement>) => callBack(event.currentTarget.checked)
 
     return (
         <>

@@ -8,8 +8,8 @@ type EditableSpanType = {
     updateTitle: (newTitle: string) => void
 }
 
-const EditableSpan = ({title, updateTitle}: EditableSpanType) => {
-
+export const EditableSpan = React.memo(({title, updateTitle}: EditableSpanType) => {
+    console.log('Editable span')
     const [editMode, setEditMode] = useState(false)
     const [newTitle, setNewTitle] = useState(title)
 
@@ -35,6 +35,4 @@ const EditableSpan = ({title, updateTitle}: EditableSpanType) => {
             >{title}
         </span>
     );
-};
-
-export default EditableSpan;
+})

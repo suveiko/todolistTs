@@ -11,7 +11,7 @@ import {
 } from "./state/todolists-reducer";
 
 import {TaskType, Todolist} from './Todolist';
-import AddItemForm from "./components/AddItemForm";
+import {AddItemForm} from "./components/AddItemForm";
 
 import './App.css';
 
@@ -25,6 +25,7 @@ export type TodoListsType = {
 export type TasksStateType = {
     [key: string]: TaskType[]
 }
+
 
 function App() {
     console.log('app is called')

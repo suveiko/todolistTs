@@ -5,13 +5,13 @@ import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 
 import {AppRootState} from "./state/store";
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/tasks-reducer";
+import {addTaskAC} from "./state/tasks-reducer";
 
 import {FilterValuesType} from './App';
 
-import {CheckboxForm} from "./components/CheckboxForm";
 import {AddItemForm} from "./components/AddItemForm";
 import {EditableSpan} from "./components/EditableSpan";
+import {Tasks} from "./components/Tasks";
 
 
 export type TaskType = {
@@ -36,7 +36,6 @@ export const Todolist = React.memo(({
                                         changeTodolistTitle, ...p
                                     }: PropsType) => {
 
-    console.log('todolist is called')
     const dispatch = useDispatch()
     let tasks = useSelector<AppRootState, TaskType[]>(state => state.tasks[toDoListId])
 
@@ -108,37 +107,3 @@ export const Todolist = React.memo(({
     )
 })
 
-type TasksPropsType = {
-    id: string
-    isDone: boolean
-    title: string
-    todoListId: string
-}
-
-const Tasks = React.memo(({id, isDone, title, todoListId}: TasksPropsType) => {
-    console.log('Tasks')
-    const dispatch = useDispatch()
-
-    const changeTaskTitleHandler = useCallback((title: string) => {
-        dispatch(changeTaskTitleAC(todoListId, id, title))
-    }, [todoListId, id, dispatch])
-    const changeCheckBox = useCallback((isDone: boolean) => {
-        dispatch(changeTaskStatusAC(todoListId, id, isDone))
-    }, [todoListId, id, dispatch])
-
-    return (
-        <li key={id} className={isDone ? "is-done" : ""}>
-            <CheckboxForm
-                callBack={changeCheckBox}
-                isDone={isDone}
-            />
-            <EditableSpan
-                updateTitle={changeTaskTitleHandler}
-                title={title}
-            />
-            <IconButton onClick={() => dispatch(removeTaskAC(todoListId, id))}>
-                <Delete/>
-            </IconButton>
-        </li>
-    )
-})

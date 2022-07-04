@@ -10,7 +10,6 @@ type AddItemFormType = {
 
 
 export const AddItemForm = React.memo(({addTask}: AddItemFormType) => {
-    console.log('add item form')
 
     const [title, setTitle] = useState("")
     const [error, setError] = useState(false)

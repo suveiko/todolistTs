@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useCallback} from 'react';
 import {Checkbox} from "@mui/material";
 
 
@@ -7,10 +7,12 @@ type CheckboxType = {
     isDone: boolean
 }
 
-export const CheckboxForm = React.memo(({isDone, callBack}: CheckboxType) => {
-    console.log('CheckBox Form')
 
-    const onChangeHandlerCheck = (event: ChangeEvent<HTMLInputElement>) => callBack(event.currentTarget.checked)
+export const CheckboxForm = React.memo(({isDone, callBack}: CheckboxType) => {
+
+    const onChangeHandlerCheck = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+        callBack(event.currentTarget.checked)
+    }, [callBack])
 
     return (
         <>

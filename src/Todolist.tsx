@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 
 import {Button, IconButton} from "@mui/material";
@@ -29,13 +29,13 @@ type PropsType = {
     changeTodolistTitle: (title: string, id: string) => void
 }
 
-function Todolist({
-                      changeFilter, filter,
-                      toDoListId, removeToDoList,
-                      changeTodolistTitle, ...p
-                  }: PropsType) {
+export const Todolist = React.memo(({
+                                        changeFilter, filter,
+                                        toDoListId, removeToDoList,
+                                        changeTodolistTitle, ...p
+                                    }: PropsType) => {
 
-
+    console.log('todolist is called')
     const dispatch = useDispatch()
     let tasks = useSelector<AppRootState, TaskType[]>(state => state.tasks[toDoListId])
 
@@ -43,14 +43,16 @@ function Todolist({
     if (filter === "completed") tasks = tasks.filter(t => t.isDone);
 
 
-    const changeTodoListTitle = (title: string) => {
-        changeTodolistTitle(title, toDoListId)
-    }
+    const changeTodoListTitle = (title: string) => changeTodolistTitle(title, toDoListId)
     const removeToDoListHandler = () => removeToDoList(toDoListId)
 
     const onAllClickHandler = () => changeFilter(toDoListId, "all");
     const onActiveClickHandler = () => changeFilter(toDoListId, "active");
     const onCompletedClickHandler = () => changeFilter(toDoListId, "completed");
+
+    const addTask = useCallback((title: string) => {
+        dispatch(addTaskAC(toDoListId, title))
+    }, [])
 
     const itemTasks = tasks.map(({id, isDone, title}) => {
         const changeTaskTitleHandler = (title: string) => dispatch(changeTaskTitleAC(toDoListId, id, title))
@@ -79,7 +81,7 @@ function Todolist({
                     <Delete/>
                 </IconButton>
             </h3>
-            <AddItemForm addTask={(title: string) => dispatch(addTaskAC(toDoListId, title))}/>
+            <AddItemForm addTask={addTask}/>
             <ul>
                 {itemTasks}
             </ul>
@@ -102,6 +104,4 @@ function Todolist({
             </div>
         </div>
     )
-}
-
-export default Todolist
+})

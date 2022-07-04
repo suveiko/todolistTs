@@ -8,7 +8,7 @@ type AddItemFormType = {
     addTask: (title: string) => void
 }
 
-const AddItemForm = ({addTask}: AddItemFormType) => {
+const AddItemForm = React.memo(({addTask}: AddItemFormType) => {
     console.log('add item form')
 
     const [title, setTitle] = useState("")
@@ -46,6 +46,6 @@ const AddItemForm = ({addTask}: AddItemFormType) => {
             </IconButton>
         </div>
     );
-};
+});
 
 export default AddItemForm;

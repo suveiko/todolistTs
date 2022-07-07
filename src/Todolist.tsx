@@ -20,7 +20,7 @@ export type TaskType = {
     isDone: boolean
 }
 type PropsType = {
-    title: string
+    newTitle: string
     toDoListId: string
     filter: FilterValuesType
 
@@ -33,7 +33,7 @@ type PropsType = {
 export const Todolist = React.memo(({
                                         changeFilter, filter,
                                         toDoListId, removeToDoList,
-                                        changeTodolistTitle, ...p
+                                        changeTodolistTitle, newTitle
                                     }: PropsType) => {
 
     const dispatch = useDispatch()
@@ -77,7 +77,7 @@ export const Todolist = React.memo(({
     return (
         <div>
             <h3>
-                <EditableSpan title={p.title} updateTitle={changeTodoListTitle}/>
+                <EditableSpan title={newTitle} updateTitle={changeTodoListTitle}/>
                 <IconButton onClick={removeToDoListHandler}>
                     <Delete/>
                 </IconButton>

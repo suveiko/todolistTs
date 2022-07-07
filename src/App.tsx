@@ -58,7 +58,7 @@ function App() {
                     square
                 >
                     <Todolist
-                        title={title}
+                        newTitle={title}
                         toDoListId={id}
                         filter={filter}
 

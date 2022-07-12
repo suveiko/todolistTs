@@ -5,24 +5,24 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 
 
 type AddItemFormType = {
-    addTask: (title: string) => void
+    addItem: (title: string) => void
 }
 
 
-export const AddItemForm = React.memo(({addTask}: AddItemFormType) => {
+export const AddItemForm = React.memo(({addItem}: AddItemFormType) => {
 
     const [title, setTitle] = useState("")
     const [error, setError] = useState(false)
 
-    const addItem = () => {
-        title.trim() ? addTask(title.trim()) : setError(true)
+    const addNewItem = () => {
+        title.trim() ? addItem(title.trim()) : setError(true)
         setTitle('')
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         error && setError(false)
 
-        e.key === 'Enter' && addItem();
+        e.key === 'Enter' && addNewItem();
     }
 
     return (
@@ -39,7 +39,7 @@ export const AddItemForm = React.memo(({addTask}: AddItemFormType) => {
             />
             <IconButton
                 color='primary'
-                onClick={addItem}
+                onClick={addNewItem}
                 disabled={title.trim() === ''}
             >
                 <AddBoxIcon/>

@@ -5,13 +5,13 @@ import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 
 import {AppRootState} from "./state/store";
-import {addTaskAC} from "./state/tasks-reducer";
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/tasks-reducer";
 
 import {FilterValuesType} from './App';
 
-import {AddItemForm} from "./components/AddItemForm";
-import {EditableSpan} from "./components/EditableSpan";
-import {Tasks} from "./components/Tasks";
+import {AddItemForm} from "./components/AddItemForm/AddItemForm";
+import {EditableSpan} from "./components/EditableSpan/EditableSpan";
+import {Tasks} from "./components/Tasks/Tasks";
 
 
 export type TaskType = {
@@ -65,12 +65,19 @@ export const Todolist = React.memo(({
     }, [dispatch])
 
     const itemTasks = tasks.map(({id, isDone, title}) => {
+
+        const changeTaskTitleHandler = (title: string) => dispatch(changeTaskTitleAC(toDoListId, id, title))
+        const changeCheckBox = (isDone: boolean) => dispatch(changeTaskStatusAC(toDoListId, id, isDone))
+        const removeTask = () => dispatch(removeTaskAC(toDoListId, id))
+
         return <Tasks
             key={`${id}-${toDoListId}`}
             id={id}
             isDone={isDone}
             title={title}
-            todoListId={toDoListId}
+            changeTaskTitleHandler={changeTaskTitleHandler}
+            changeCheckBox={changeCheckBox}
+            removeTask={removeTask}
         />
     })
 
@@ -82,7 +89,7 @@ export const Todolist = React.memo(({
                     <Delete/>
                 </IconButton>
             </h3>
-            <AddItemForm addTask={addTask}/>
+            <AddItemForm addItem={addTask}/>
             <ul>
                 {itemTasks}
             </ul>

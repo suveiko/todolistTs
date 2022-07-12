@@ -11,7 +11,7 @@ import {
 } from "./state/todolists-reducer";
 
 import {TaskType, Todolist} from './Todolist';
-import {AddItemForm} from "./components/AddItemForm";
+import {AddItemForm} from "./components/AddItemForm/AddItemForm";
 
 import './App.css';
 
@@ -86,7 +86,7 @@ function App() {
             </AppBar>
             <Container fixed>
                 <Grid container style={{padding: '15px 0px'}}>
-                    <AddItemForm addTask={addTodoList}/>
+                    <AddItemForm addItem={addTodoList}/>
                 </Grid>
                 <Grid container spacing={4}>
                     {itemsTodoLists}

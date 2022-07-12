@@ -4,14 +4,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 
-import {AppRootState} from "./state/store";
+import {AppRootState} from "../state/store";
 import {
     addTodoListAC, changeTodoListAC,
     changeTodoListFilterAC, removeTodoListAC,
-} from "./state/todolists-reducer";
+} from "../state/todolists-reducer";
 
-import {TaskType, Todolist} from './Todolist';
-import {AddItemForm} from "./components/AddItemForm/AddItemForm";
+import {TaskType, Todolist} from '../components/Todolist/Todolist';
+import {AddItemForm} from "../components/AddItemForm/AddItemForm";
 
 import './App.css';
 

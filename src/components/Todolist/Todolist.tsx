@@ -4,14 +4,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 
-import {AppRootState} from "./state/store";
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/tasks-reducer";
+import {AppRootState} from "../../state/store";
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "../../state/tasks-reducer";
 
-import {FilterValuesType} from './App';
+import {FilterValuesType} from '../../app/App';
 
-import {AddItemForm} from "./components/AddItemForm/AddItemForm";
-import {EditableSpan} from "./components/EditableSpan/EditableSpan";
-import {Tasks} from "./components/Tasks/Tasks";
+import {AddItemForm} from "../AddItemForm/AddItemForm";
+import {EditableSpan} from "../EditableSpan/EditableSpan";
+import {Tasks} from "../Tasks/Tasks";
 
 
 export type TaskType = {

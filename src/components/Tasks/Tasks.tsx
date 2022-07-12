@@ -6,7 +6,7 @@ import {Delete} from "@mui/icons-material";
 import {CheckboxForm} from "../CheckboxForm/CheckboxForm";
 import {EditableSpan} from "../EditableSpan/EditableSpan";
 
-import {TaskType} from "../../Todolist";
+import {TaskType} from "../Todolist/Todolist";
 
 
 type TasksPropsType = {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {ComponentStory, ComponentMeta} from '@storybook/react';
-
 import {action} from "@storybook/addon-actions";
+
 import {CheckboxForm} from "./CheckboxForm";
 
 
@@ -25,6 +25,6 @@ CheckboxStoriesTrue.args = {
 
 export const CheckboxStoriesFalse = Template.bind({});
 CheckboxStoriesFalse.args = {
-    isDone: true,
+    isDone: false,
     callBack: action('checkbox isDone false')
 };

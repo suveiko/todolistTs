@@ -13,12 +13,12 @@ export const TodolistAPI = {
     getTodoLists: () => axios
         .get('https://social-network.samuraijs.com/api/1.1/todo-lists', setting),
 
-    createTodoList: () => axios
-        .post('https://social-network.samuraijs.com/api/1.1/todo-lists', {title: 'What to learn'}, setting),
+    createTodoList: (title: string) => axios
+        .post('https://social-network.samuraijs.com/api/1.1/todo-lists', {title}, setting),
 
-    deleteTodoList: (todolistId: string) => axios
-        .delete(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`, setting),
+    deleteTodoList: (id: string) => axios
+        .delete(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, setting),
 
-    updateTodoListTitle: (todolistId: string) => axios
-        .put(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`, {title: 'last Todo'}, setting)
+    updateTodoListTitle: (id: string, title: string) => axios
+        .put(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, {title}, setting)
 }

@@ -14,6 +14,15 @@ export type TaskType = {
     order: string
     addedDate: string
 }
+export type UpdateTaskType = {
+    title: string
+    description: string
+    completed: boolean
+    status: number
+    priority: number
+    startDate: string
+    deadline: string
+}
 export type GetTasksType = {
     error: string | null
     totalCount: number
@@ -36,6 +45,6 @@ export const TasksAPI = {
     deleteTask: (todoListId: string, taskId: string) => instance
         .delete<ResponseType>(`todo-lists/${todoListId}/tasks/${taskId}`),
 
-    updateTask: (todoListId: string, taskId: string, title: string) => instance
-        .put<ResponseType>(`todo-lists/${todoListId}/tasks/${taskId}`, {title})
+    updateTask: (todoListId: string, taskId: string, data: UpdateTaskType) => instance
+        .put<UpdateTaskType>(`todo-lists/${todoListId}/tasks/${taskId}`, data)
 }

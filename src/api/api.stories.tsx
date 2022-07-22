@@ -22,7 +22,7 @@ export const GetTodoLists = () => {
     useEffect(() => {
         TodolistAPI
             .getTodoLists()
-            .then(res => setState(res.data))
+            .then(data => setState(data))
     }, [])
 
     return <div>{JSON.stringify(state)}</div>
@@ -33,7 +33,7 @@ export const CreateTodolist = () => {
 
     const createTodoList = () => TodolistAPI
         .createTodoList(title)
-        .then(res => setState(res.data))
+        .then(data => setState(data))
 
     return <div>
         {JSON.stringify(state)}
@@ -54,7 +54,7 @@ export const DeleteTodolist = () => {
 
     const deleteTodoList = () => TodolistAPI
         .deleteTodoList(todoListId)
-        .then(res => setState(res.data))
+        .then(data => setState(data))
 
     return <div>
         {JSON.stringify(state)}
@@ -73,9 +73,9 @@ export const UpdateTodolistTitle = () => {
     const [title, setTitle] = useState<string>('')
     const [todoListId, setTodoListId] = useState<string>('')
 
-    const updateTodoListTitle = () => TodolistAPI
+    const changeTodoListTitle = () => TodolistAPI
         .updateTodoListTitle(todoListId, title)
-        .then(res => setState(res.data))
+        .then(data => setState(data))
 
     return <div>
         {JSON.stringify(state)}
@@ -90,7 +90,7 @@ export const UpdateTodolistTitle = () => {
                 value={todoListId}
                 onChange={e => setTodoListId(e.currentTarget.value)}
             />
-            <button onClick={updateTodoListTitle}>Update todolist title</button>
+            <button onClick={changeTodoListTitle}>Update todolist title</button>
         </div>
     </div>
 }
@@ -102,7 +102,7 @@ export const GetTasks = () => {
 
     const getTasks = () => TaskApi
         .getTasks(todoListId)
-        .then(res => setState(res.data))
+        .then(data => setState(data))
 
     return <div>
         {JSON.stringify(state)}
@@ -121,9 +121,9 @@ export const CreateTask = () => {
     const [title, setTitle] = useState<string>('')
     const [todoListId, setTodoListId] = useState<string>('')
 
-    const changeTaskTitle = () => TaskApi
+    const createTask = () => TaskApi
         .createTasks(todoListId, title)
-        .then(res => setState(res.data))
+        .then(data => setState(data))
 
     return <div>
         {JSON.stringify(state)}
@@ -138,7 +138,7 @@ export const CreateTask = () => {
                 value={todoListId}
                 onChange={e => setTodoListId(e.currentTarget.value)}
             />
-            <button onClick={changeTaskTitle}>Change task title</button>
+            <button onClick={createTask}>Change task title</button>
         </div>
     </div>
 }
@@ -149,7 +149,7 @@ export const DeleteTask = () => {
 
     const deleteTask = () => TaskApi
         .deleteTask(todoListId, taskId)
-        .then(res => setState(res.data))
+        .then(data => setState(data))
 
     return <div>
         {JSON.stringify(state)}
@@ -175,7 +175,7 @@ export const UpdateTask = () => {
     const [title, setTitle] = useState<string>('')
 
 
-    const updateTask = () => {
+    const changeTaskTitle = () => {
         const model: UpdateTaskType = {
             title: title,
             description: '',
@@ -188,7 +188,7 @@ export const UpdateTask = () => {
 
         TaskApi
             .updateTask(todoListId, taskId, model)
-            .then(res => setState(res.data))
+            .then(data => setState(data))
     }
 
     return <div>
@@ -209,7 +209,7 @@ export const UpdateTask = () => {
                 value={title}
                 onChange={e => setTitle(e.currentTarget.value)}
             />
-            <button onClick={updateTask}>update</button>
+            <button onClick={changeTaskTitle}>update</button>
         </div>
     </div>
 }

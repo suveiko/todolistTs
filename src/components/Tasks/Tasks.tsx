@@ -6,7 +6,7 @@ import {Delete} from "@mui/icons-material";
 import {CheckboxForm} from "../CheckboxForm/CheckboxForm";
 import {EditableSpan} from "../EditableSpan/EditableSpan";
 
-import {TaskType} from "../Todolist/Todolist";
+import {TaskType} from "../../api/types/apiTypes";
 
 
 type TasksPropsType = {
@@ -17,14 +17,14 @@ type TasksPropsType = {
 
 
 export const Tasks = React.memo((
-    {isDone, title, changeTaskTitleHandler, changeCheckBox, removeTask}
+    {completed, title, changeTaskTitleHandler, changeCheckBox, removeTask}
         : TasksPropsType) => {
 
     return (
-        <li className={isDone ? "is-done" : ""}>
+        <li className={completed ? "is-done" : ""}>
             <CheckboxForm
                 callBack={changeCheckBox}
-                isDone={isDone}
+                isDone={completed}
             />
             <EditableSpan
                 updateTitle={changeTaskTitleHandler}

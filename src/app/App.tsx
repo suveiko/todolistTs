@@ -7,21 +7,17 @@ import {Menu} from "@mui/icons-material";
 import {AppRootState} from "../state/store";
 import {
     addTodoListAC, changeTodoListAC,
-    changeTodoListFilterAC, removeTodoListAC,
+    changeTodoListFilterAC, FilterValuesType, removeTodoListAC, TodoListDomainType,
 } from "../state/todolists-reducer";
 
-import {TaskType, Todolist} from '../components/Todolist/Todolist';
+import {Todolist} from '../components/Todolist/Todolist';
 import {AddItemForm} from "../components/AddItemForm/AddItemForm";
+
+import {TaskType} from "../api/types/apiTypes";
 
 import './App.css';
 
 
-export type FilterValuesType = "all" | "active" | "completed";
-export type TodoListsType = {
-    id: string
-    title: string
-    filter: FilterValuesType
-}
 export type TasksStateType = {
     [key: string]: TaskType[]
 }
@@ -30,7 +26,7 @@ export type TasksStateType = {
 function App() {
 
     const dispatch = useDispatch()
-    const todoLists = useSelector<AppRootState, TodoListsType[]>(state => state.todoLists)
+    const todoLists = useSelector<AppRootState, TodoListDomainType[]>(state => state.todoLists)
 
     const changeFilter = useCallback((toDoId: string, value: FilterValuesType) => {
         dispatch(changeTodoListFilterAC(toDoId, value))
@@ -38,7 +34,7 @@ function App() {
     const changeTodolistTitle = useCallback((title: string, id: string) => {
         dispatch(changeTodoListAC(id, title))
     },[dispatch])
-    const removeToDoList = useCallback((toDoId: string) => {
+    const removeTodoList = useCallback((toDoId: string) => {
         dispatch(removeTodoListAC(toDoId))
     },[dispatch])
     const addTodoList = useCallback((title: string) => {
@@ -63,7 +59,7 @@ function App() {
                         filter={filter}
 
                         changeFilter={changeFilter}
-                        removeToDoList={removeToDoList}
+                        removeToDoList={removeTodoList}
                         changeTodolistTitle={changeTodolistTitle}
                     />
                 </Paper>

@@ -7,18 +7,15 @@ import {Delete} from "@mui/icons-material";
 import {AppRootState} from "../../state/store";
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "../../state/tasks-reducer";
 
-import {FilterValuesType} from '../../app/App';
-
 import {AddItemForm} from "../AddItemForm/AddItemForm";
 import {EditableSpan} from "../EditableSpan/EditableSpan";
 import {Tasks} from "../Tasks/Tasks";
 
+import {FilterValuesType} from "../../state/todolists-reducer";
 
-export type TaskType = {
-    id: string
-    title: string
-    isDone: boolean
-}
+import {TaskType} from "../../api/types/apiTypes";
+
+
 type PropsType = {
     newTitle: string
     toDoListId: string
@@ -39,8 +36,8 @@ export const Todolist = React.memo(({
     const dispatch = useDispatch()
     let tasks = useSelector<AppRootState, TaskType[]>(state => state.tasks[toDoListId])
 
-    if (filter === "active") tasks = tasks.filter(t => !t.isDone);
-    if (filter === "completed") tasks = tasks.filter(t => t.isDone);
+    if (filter === "active") tasks = tasks.filter(t => !t.completed);
+    if (filter === "completed") tasks = tasks.filter(t => t.completed);
 
 
     const changeTodoListTitle = useCallback((title: string) => {
@@ -64,7 +61,7 @@ export const Todolist = React.memo(({
         dispatch(addTaskAC(toDoListId, title))
     }, [dispatch])
 
-    const itemTasks = tasks.map(({id, isDone, title}) => {
+    const itemTasks = tasks.map(({id, completed, title}) => {
 
         const changeTaskTitleHandler = (title: string) => dispatch(changeTaskTitleAC(toDoListId, id, title))
         const changeCheckBox = (isDone: boolean) => dispatch(changeTaskStatusAC(toDoListId, id, isDone))
@@ -73,7 +70,7 @@ export const Todolist = React.memo(({
         return <Tasks
             key={`${id}-${toDoListId}`}
             id={id}
-            isDone={isDone}
+            completed={completed}
             title={title}
             changeTaskTitleHandler={changeTaskTitleHandler}
             changeCheckBox={changeCheckBox}

@@ -27,7 +27,7 @@ TasksIsDoneStories.args = {
     ...baseArgs,
     id: '1234-DDS2-12WW-SSSS',
     title: 'HTML',
-    isDone: true
+    completed: true
 };
 
 
@@ -36,6 +36,6 @@ TasksIsNotDoneStories.args = {
     ...baseArgs,
     id: '1234-DDS2-12WW-SSSS',
     title: 'HTML',
-    isDone: false
+    completed: false
 };
 
